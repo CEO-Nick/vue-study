@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 아래에서 정의한 컴포넌트 태그를 사용할 수 있다. 이 부분에서 컴포넌트 내용 반영 -->
+        <app-header></app-header>
+        <app-content></app-content> <!-- 이 태그는 화면에 뿌려질 때 <div>Content</div>로 대체된다. -->
+        <app-footer></app-footer>
+    </div>
+
+    <div id="app2">
+        <app-header></app-header>
+        <app-footer></app-footer>   <!-- 이건 app을 위한 지역 컴포넌트라 여기선 사용 불가 -> 따로 등록해서 사용해야 한다. -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        // 전역 컴포넌트 등록 방법: Vue.component('컴포넌트 이름', 컴포넌트 내용); (거의 쓸 일 없음)
+        Vue.component('app-header', {
+            template: '<h1>Header</h1>'
+        });
+
+        Vue.component('app-content', {
+            template: '<div>Content</div>'
+        });
+
+        new Vue({
+            el: '#app',
+            // 지역 컴포넌트 등록 방법
+            components: {
+                'app-footer': {
+                    template: '<footer>footer</footer>'
+                },
+            },
+            data: {
+                message: 'hi'
+            }
+        });
+
+        new Vue({
+            el: '#app2',
+        });
+    </script>
+</body>
+</html>

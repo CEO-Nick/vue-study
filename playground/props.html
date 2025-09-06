@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <app-header v-bind:프롭스 속성 이름 = "상위 컴포넌트의 데이터 이름"></app-header> -->
+        <!-- v-bind는 부모 컴포넌트의 num 데이터와 자식 컴포넌트 appContent의 propsdata props를 연결하는 역할-->
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content> 
+        <app-user v-bind:propsdata="user"></app-user>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var appHeader = {
+            template: '<h1>{{ propsdata }}</h1>',
+            props: ['propsdata'],
+        }
+
+        var appContent = {
+            template: '<div> {{ propsdata }} </div>',
+            props: ['propsdata']
+        } 
+
+        var appUser = {
+            template: '<div> {{ propsdata }} </div>',
+            props: ['propsdata'],
+        }
+
+        var user = {
+            name: 'dd',
+            age: 20,
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+                'app-user': appUser,
+            },
+            data: {
+                message: 'hi hello world',
+                num: 12,
+                user: user,
+            }
+        });
+        // root의 message와 appHeader의 propsdata를 연결함 -> v-bind를 통해서
+        // 그럼 root의 message가 수정되면 그게 그대로 appHeader의 propsdata에 반영된다.
+    </script>
+</body>
+</html>

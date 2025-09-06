@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ num }}</p>
+        
+        <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름"></app-header> -->
+        <app-header v-on:pass="logText" v-bind:propsdata="num"></app-header>
+        <app-content v-on:increase="increaseNumber"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var appHeader = {
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods: {
+                // 버튼을 눌렀을 때 실행될 함수
+                // 이벤트 이름은 'pass'임. passEvent가 아님
+                passEvent: function() {
+                    this.$emit('pass'); // emit은 vue.js에서 제공하는 api 중 하나로 이벤트를 발생시키는 함수
+                }
+            },
+        }
+
+        var appContent = {
+            // v-on:click="addNumber" -> 버튼을 클릭하면 addNumber 함수를 실행시키겠다
+            template: '<button v-on:click="addNumber">add</button>',
+            methods: {
+                addNumber: function() {
+                    this.$emit('increase')
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+            },
+            methods: {
+                logText: function() {
+                    console.log('hi');
+                },
+                increaseNumber: function() {
+                    this.num++;
+                }
+            },
+            data: {
+                num: 10,
+            }
+        });
+    
+    </script>
+</body>
+</html>

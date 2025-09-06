@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <app-header v-bind:propsdata="num"></app-header>
+        <app-content v-on:send="deliverNum"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            template: '<h1> {{ propsdata }}</h1>',
+            props: ['propsdata'],
+        }
+        
+        var appContent = {
+            template: '<button v-on:click="send">send</button>',
+            methods: {
+                send: function() {
+                    this.$emit('send', 10);
+                },
+            }
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent,
+            },
+            methods: {
+                deliverNum: function(data) {
+                    this.num = data;
+                },
+            },
+            data: {
+                num: 20,
+            }
+        });
+
+
+    </script>
+</body>
+</html>
