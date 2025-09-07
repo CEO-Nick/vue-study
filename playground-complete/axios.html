@@ -24,11 +24,14 @@
       },
       methods: {
         getData: function() { 
+          // axios에서 Vue의 users 데이터에 접근하기 위해 미리 this를 담아두기 -> .then() {} 안에서 this는 Vue 객체가 아니기 때문에
           var vm = this;
           axios.get('https://jsonplaceholder.typicode.com/users/')
             .then(function(response) {
               console.log(response.data);
               vm.users = response.data;
+              // this.users는 Vue의 this가 아님
+              console.log('this: ' + this);
             })
             .catch(function(error) {
               console.log(error);
