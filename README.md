@@ -1,5 +1,9 @@
 # Vue.js 시작하기
 
+1. 공식문서 읽기
+2. style-guid 읽기
+3. cook book 읽기
+
 [Vue.js 시작하기 인프런 강의](https://inf.run/RxKK)와 [Vue 3 시작하기 인프런 강의](https://inf.run/kRHp) 리포지토리입니다.
 
 ![인프런 Vue 3 시작하기 강의 썸네일](https://cdn.inflearn.com/public/courses/332010/cover/fffd02eb-685e-44ab-aa0d-6788349338c5/332010-eng.png)
